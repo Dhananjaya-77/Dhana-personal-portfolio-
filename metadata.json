@@ -1,0 +1,6 @@
+{
+  "name": "Personal Portfolio",
+  "description": "A clean, modern, multi-page portfolio website for Hasitha Dhananjaya Wickramaarachchi, incorporating Human-Computer Interaction (HCI) best practices.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
