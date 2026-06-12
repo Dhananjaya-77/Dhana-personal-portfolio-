@@ -10,17 +10,30 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [mailtoUrl, setMailtoUrl] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!formData.name || !formData.email || !formData.message) {
+      setErrorMessage("Please complete all required fields before sending your message.");
+      return;
+    }
 
-    // Simulate small aesthetic network delay (0.8 seconds) for system response feedback
+    setErrorMessage(null);
     setIsSubmitting(true);
+
+    const subject = encodeURIComponent(`Portfolio message from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    const mailtoLink = `mailto:hasidhananjaya121212@gmail.com?subject=${subject}&body=${body}`;
+    setMailtoUrl(mailtoLink);
+
     setTimeout(() => {
+      if (typeof window !== "undefined") {
+        window.location.href = mailtoLink;
+      }
       setIsSubmitting(false);
       setIsSubmitted(true);
-      // Reset after a while, keeping the success state visible
       setFormData({ name: "", email: "", message: "" });
     }, 850);
   };
@@ -140,11 +153,18 @@ export default function Contact() {
             <div className="rounded-2xl card-surface p-6 md:p-8 backdrop-blur-sm shadow-xl">
               <div className="flex items-center space-x-2.5 mb-6">
                 <MessageSquare className="h-5 w-5 text-[#ef4444]" />
-                <h2 id="form-heading" className="text-lg font-bold text-white uppercase tracking-wide">Send Me A Message</h2>
+                <h2 id="form-heading" className="text-lg font-bold text-white uppercase tracking-wide">
+                  Hasitha Dhananjaya
+                </h2>
               </div>
 
               {/* Form block */}
               <form onSubmit={handleSubmit} className="space-y-5" id="contact-form">
+                {errorMessage && (
+                  <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-200">
+                    {errorMessage}
+                  </div>
+                )}
                 
                 {/* Name field */}
                 <div>
@@ -250,8 +270,20 @@ export default function Contact() {
                     <div>
                       <p className="text-sm font-semibold">Thank you for getting in touch, Hasitha here!</p>
                       <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                        Your message simulated dispatch successfully. In a production build, this payload hooks directly into a backend mailer. Thank you for testing this Human-Computer Interaction form!
+                        Your email draft should open in your default mail application. If it does not, use the link below to open it manually.
                       </p>
+                      {mailtoUrl && (
+                        <p className="mt-2 text-xs text-[#ef4444]">
+                          <a
+                            href={mailtoUrl}
+                            className="underline"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Open email draft manually
+                          </a>
+                        </p>
+                      )}
                       <button 
                         onClick={() => setIsSubmitted(false)}
                         className="mt-2 text-[11px] font-mono hover:underline font-semibold text-emerald-400"
