@@ -17,20 +17,24 @@ export default function App() {
         {/* Navigation Header */}
         <Navbar />
 
-        {/* Content Section Routes */}
+        {/* Main content area where different pages are rendered using routes */}
         <div className="relative flex flex-grow flex-col z-10">
           <Routes>
+            {/* Home page route */}
             <Route path="/" element={<Home />} />
+            {/* About page route */}
             <Route path="/about" element={<About />} />
+            {/* Projects page route */}
             <Route path="/projects" element={<Projects />} />
+            {/* Contact page route */}
             <Route path="/contact" element={<Contact />} />
             
-            {/* Graceful redirect for robust system error handling */}
+            {/* Redirect any unknown route back to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
 
-        {/* Layout Footer */}
+        {/* Footer shown on every page */}
         <Footer />
         
       </div>

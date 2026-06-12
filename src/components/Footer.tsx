@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
+  // Use the current year so the footer remains up to date automatically.
   const currentYear = new Date().getFullYear();
 
   return (
@@ -11,10 +12,10 @@ export default function Footer() {
           {/* Logo representation and name */}
           <div className="text-center sm:text-left">
             <span className="font-mono text-lg font-bold tracking-wider text-white">
-              &lt;<span className="text-[#ef4444]">HDW</span>/&gt;
+              Hasitha Dhananjaya
             </span>
             <p className="mt-1 text-[11px] text-[#a0a0a0] font-medium tracking-wide uppercase">
-               Hasitha Dhananjaya Wickramaarachchi &bull; Portfolio
+               Portfolio
             </p>
           </div>
 
@@ -61,10 +62,7 @@ export default function Footer() {
           {/* Copyright description */}
           <div className="text-center sm:text-right">
             <p id="footer-copyright" className="text-[10px] text-[#a0a0a0] tracking-widest uppercase font-mono">
-              &copy; {currentYear} HASITHA DHANANJAYA &bull; DESIGNED WITH HCI PRINCIPLES
-            </p>
-            <p className="mt-0.5 text-[10px] text-zinc-600 font-mono tracking-wider uppercase">
-              HCI Assignment Submission
+              {/* Footer details removed per request */}
             </p>
           </div>
         </div>

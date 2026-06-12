@@ -62,16 +62,6 @@ export default function Home() {
           >
             {/* Left text column */}
             <div className="space-y-6 lg:col-span-7 z-10">
-              <motion.div 
-                variants={itemVariants} 
-                className="inline-flex items-center space-x-2 rounded-full border border-[#ef4444]/30 bg-[#ef4444]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#ef4444] shadow-md shadow-red-900/10"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ef4444] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ef4444]"></span>
-                </span>
-                <span>Available for Internship &bull; HCI Certified</span>
-              </motion.div>
 
               <div className="space-y-4">
                 <motion.h4 variants={itemVariants} className="font-mono text-xs md:text-sm tracking-wider uppercase text-[#a3a3a3] flex items-center gap-1.5">

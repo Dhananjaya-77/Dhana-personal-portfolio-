@@ -3,31 +3,40 @@ import { motion, AnimatePresence } from "motion/react";
 import { Mail, Phone, Linkedin, Github, Send, CheckCircle2, MessageSquare, ShieldCheck } from "lucide-react";
 
 export default function Contact() {
+  // Form state that tracks each input field value.
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
+  // Whether the form is currently being submitted.
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Whether the success state is active after submission.
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Error message shown when validation fails.
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // The generated mailto URL for manual fallback if the browser does not open the email client automatically.
   const [mailtoUrl, setMailtoUrl] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent page reload and handle submission in JavaScript.
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setErrorMessage("Please complete all required fields before sending your message.");
       return;
     }
 
+    // Clear any previous error and show the loading indicator.
     setErrorMessage(null);
     setIsSubmitting(true);
 
+    // Build the mailto link from the form values.
     const subject = encodeURIComponent(`Portfolio message from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
     const mailtoLink = `mailto:hasidhananjaya121212@gmail.com?subject=${subject}&body=${body}`;
     setMailtoUrl(mailtoLink);
 
+    // Simulate a short delay so the user sees a loading state before the browser opens the email client.
     setTimeout(() => {
       if (typeof window !== "undefined") {
         window.location.href = mailtoLink;
@@ -40,9 +49,11 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    // Update the form state dynamically based on the input name attribute.
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Static contact cards displayed on the left side of the form.
   const contactDetails = [
     {
       id: "email",
