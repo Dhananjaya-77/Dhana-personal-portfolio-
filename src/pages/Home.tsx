@@ -82,7 +82,7 @@ export default function Home() {
                   variants={itemVariants} 
                   className="bg-gradient-to-r from-white via-zinc-250 to-[#ef4444] bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl"
                 >
-                  Hasitha Dhananjaya Wickramaarachchi
+                  Hasitha Dhananjaya
                 </motion.h1>
                 <motion.p 
                   variants={itemVariants} 
