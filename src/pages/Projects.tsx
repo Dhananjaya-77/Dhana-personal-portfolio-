@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import flashcardPreview from "../assets/images/flashcard_preview_1781120529761.png";
+import busTrackerPreview from "../assets/images/bus_tracker_preview_1781122076520.png";
+import busTrackerMapPreview from "../assets/images/sl_bus_tracker_map_preview_1781123088697.png";
+import erpDashboardPreview from "../assets/images/erp_dashboard_1781123885443.png";
+import eventhubPreview from "../assets/images/eventhub_preview_1781160769870.png";
 import { 
   Github, 
   ExternalLink, 
@@ -320,8 +325,8 @@ export default function Projects() {
                       {isFlashcard && (
                         <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
                           <ProjectImage
-                            primarySrc="/src/assets/images/flashcard_screenshot.png"
-                            fallbackSrc="/src/assets/images/flashcard_preview_1781120529761.png"
+                            primarySrc={flashcardPreview}
+                            fallbackSrc={flashcardPreview}
                             alt="AI Flashcard Generator Preview"
                           />
                         </div>
@@ -330,8 +335,8 @@ export default function Projects() {
                       {isBusTracker && (
                         <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
                           <ProjectImage
-                            primarySrc="/src/assets/images/bus_tracker_screenshot.png"
-                            fallbackSrc="/src/assets/images/sl_bus_tracker_map_preview_1781123088697.png"
+                            primarySrc={busTrackerPreview}
+                            fallbackSrc={busTrackerMapPreview}
                             alt="SL Bus Tracker Preview"
                           />
                         </div>
@@ -340,8 +345,8 @@ export default function Projects() {
                       {isERP && (
                         <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
                           <ProjectImage
-                            primarySrc="/src/assets/images/erp_screenshot.png"
-                            fallbackSrc="/src/assets/images/erp_dashboard_1781123885443.png"
+                            primarySrc={erpDashboardPreview}
+                            fallbackSrc={erpDashboardPreview}
                             alt="ERP Asset Management Dashboard Preview"
                           />
                         </div>
@@ -350,8 +355,8 @@ export default function Projects() {
                       {isEventSystem && (
                         <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
                           <ProjectImage
-                            primarySrc="/src/assets/images/eventhub_screenshot.png"
-                            fallbackSrc="/src/assets/images/eventhub_preview_1781160769870.png"
+                            primarySrc={eventhubPreview}
+                            fallbackSrc={eventhubPreview}
                             alt="Student Event Management System Preview"
                           />
                         </div>
