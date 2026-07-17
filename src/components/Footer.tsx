@@ -22,7 +22,7 @@ export default function Footer() {
           {/* Social Links / Access Handles */}
           <div className="flex space-x-6">
             <a
-              href="https://github.com/Hasitha123456789"
+              href="https://github.com/Hasitha123456789/Hasitha-Dhananjaya-Wickramaarachchi"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#a0a0a0] transition-colors duration-300 hover:text-[#ef4444]"

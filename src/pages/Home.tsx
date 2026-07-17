@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Code, Shield, GraduationCap } from "lucide-react";
+import profilePhoto from "../assets/images/profile_photo.jpg";
 
 export default function Home() {
   const containerVariants = {
@@ -153,16 +154,10 @@ export default function Home() {
                 {/* Image holder with border */}
                 <div className="relative h-60 w-60 md:h-72 md:w-72 overflow-hidden rounded-full border-4 border-[#07070a] bg-zinc-950 shadow-2xl scanline">
                   <img
-                    src="https://media.licdn.com/dms/image/v2/D5603AQHJrqryBW6FDA/profile-displayphoto-crop_800_800/B56ZpuJ73kJoAI-/0/1762784703062?e=1782950400&v=beta&t=cRGV-Vnr652ytUpyQ2sRWQUw87g6-hlpV7xPMdsHwRQ"
+                    src={profilePhoto}
                     alt="Hasitha Dhananjaya Wickramaarachchi Profile Photo"
                     className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-[1.06]"
-                    referrerPolicy="no-referrer"
                     id="profile-img"
-                    onError={(e) => {
-                      // fallback representation if the external cdn fails or is blocked
-                      const target = e.currentTarget;
-                      target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500&auto=format&fit=crop";
-                    }}
                   />
                 </div>
               </motion.div>
