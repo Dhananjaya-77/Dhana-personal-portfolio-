@@ -82,10 +82,10 @@ export default function Contact() {
     {
       id: "github",
       label: "GitHub Source Repositories",
-      value: "Dhananjaya-77",
+      value: "github.com/Dhananjaya-77",
       link: "https://github.com/Dhananjaya-77",
       icon: Github,
-      subText: "Browse my code contributions"
+      subText: "Browse all my public GitHub projects"
     }
   ];
 

@@ -26,7 +26,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#a0a0a0] transition-colors duration-300 hover:text-[#ef4444]"
-              aria-label="Hasitha's GitHub Profile"
+              aria-label="Dhananjaya-77 GitHub Profile"
               id="footer-github-link"
             >
               <Github className="h-5 w-5" />
