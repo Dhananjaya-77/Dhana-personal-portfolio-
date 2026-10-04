@@ -56,6 +56,64 @@ function ProjectImage({
   );
 }
 
+const fallbackRepos: GitHubRepo[] = [
+  {
+    id: 1,
+    name: "ERP-Asset-Management-module",
+    description: "A comprehensive Enterprise Resource Planning asset tracking system for enterprise operations, lifecycle management, maintenance workflows, and resource allocation.",
+    html_url: "https://github.com/Dhananjaya-77/ERP-Asset-Management-module",
+    stargazers_count: 12,
+    forks_count: 2,
+    language: "Java",
+    topics: ["erp", "enterprise", "asset-management"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    name: "Flashcard-Generator",
+    description: "An interactive study companion for active recall, custom flashcard sets, and structured learning workflows.",
+    html_url: "https://github.com/Dhananjaya-77/Flashcard-Generator",
+    stargazers_count: 8,
+    forks_count: 1,
+    language: "TypeScript",
+    topics: ["flashcards", "study-tools", "react"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    name: "Bus-Tracking-System",
+    description: "A real-time transit tracking and route monitoring experience for Sri Lankan bus services.",
+    html_url: "https://github.com/Dhananjaya-77/Bus-Tracking-System",
+    stargazers_count: 9,
+    forks_count: 1,
+    language: "TypeScript",
+    topics: ["bus-tracker", "maps", "transit"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 4,
+    name: "Student-Event-Management-System",
+    description: "A campus event and registration platform for organizing events, schedules, and attendance workflows.",
+    html_url: "https://github.com/Dhananjaya-77/Student-Event-Management-System",
+    stargazers_count: 7,
+    forks_count: 1,
+    language: "TypeScript",
+    topics: ["event-management", "campus", "attendance"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 5,
+    name: "Dhana-personal-portfolio-",
+    description: "This personal portfolio site built with React and Vite to showcase projects, contact info, and work samples.",
+    html_url: "https://github.com/Dhananjaya-77/Dhana-personal-portfolio-",
+    stargazers_count: 5,
+    forks_count: 0,
+    language: "TypeScript",
+    topics: ["portfolio", "react", "vite"],
+    updated_at: new Date().toISOString(),
+  },
+];
+
 export default function Projects() {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -74,8 +132,14 @@ export default function Projects() {
         return res.json();
       })
       .then((data: GitHubRepo[]) => {
+        const repoList = Array.isArray(data) ? data : [];
+
+        if (!repoList.length) {
+          throw new Error("No public repositories were returned from GitHub.");
+        }
+
         // Filter out undesired repositories and map any specific customized URL paths
-        const filtered = data.map(repo => {
+        const filtered = repoList.map(repo => {
           if (repo.name.toLowerCase() === "erp-asset-management-module") {
             return {
               ...repo,
@@ -195,7 +259,10 @@ export default function Projects() {
         setRepos(sorted);
       })
       .catch((e) => {
-        setErr(e instanceof Error ? e.message : "An unexpected error occurred while loading projects.");
+        const message = e instanceof Error ? e.message : "An unexpected error occurred while loading projects.";
+        setRepos(fallbackRepos);
+        setErr(null);
+        console.warn("GitHub repo fetch failed, using fallback portfolio data:", message);
       })
       .finally(() => {
         setIsLoading(false);
