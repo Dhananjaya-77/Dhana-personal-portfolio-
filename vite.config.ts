@@ -4,7 +4,7 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(({ mode }) => {
-  const repoName = 'personal-portfolio';
+  const repoName = 'Hasitha-Dhananjaya-Wickramaarachchi';
 
   return {
     base: mode === 'production' ? `/${repoName}/` : '/',

@@ -3,11 +3,15 @@
 
 This portfolio is configured for GitHub Pages deployment.
 
-Once pushed to a GitHub repository named `personal-portfolio`, the site will be available at:
+The live portfolio is published from the GitHub repository:
 
-https://hasithadhananjaya.github.io/personal-portfolio/
+https://github.com/Dhananjaya-77/Hasitha-Dhananjaya-Wickramaarachchi
 
-If the repository name or GitHub username differs, update the `repoName` value in `vite.config.ts` to match your deployment target.
+The public portfolio URL is:
+
+https://dhananjaya-77.github.io/Hasitha-Dhananjaya-Wickramaarachchi/
+
+If the repository owner or name changes later, update the `repoName` value in `vite.config.ts` to match the new deployment target.
 
 ## Run Locally
 
