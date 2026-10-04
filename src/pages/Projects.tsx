@@ -61,7 +61,7 @@ export default function Projects() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [err, setErr] = useState<string | null>(null);
 
-  const username = "Hasitha123456789";
+  const username = "Dhananjaya-77";
 
   useEffect(() => {
     setIsLoading(true);
