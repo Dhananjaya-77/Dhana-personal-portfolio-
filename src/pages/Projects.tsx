@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import flashcardPreview from "../assets/images/flashcard_preview_1781120529761.png";
-import busTrackerPreview from "../assets/images/bus_tracker_preview_1781122076520.png";
-import busTrackerMapPreview from "../assets/images/sl_bus_tracker_map_preview_1781123088697.png";
 import erpDashboardPreview from "../assets/images/erp_dashboard_1781123885443.png";
 import eventhubPreview from "../assets/images/eventhub_preview_1781160769870.png";
+import profilePhoto from "../assets/images/profile_photo.jpg";
 import { 
   Github, 
   ExternalLink, 
@@ -60,7 +59,7 @@ const fallbackRepos: GitHubRepo[] = [
   {
     id: 1,
     name: "ERP-Asset-Management-module",
-    description: "A comprehensive Enterprise Resource Planning asset tracking system for enterprise operations, lifecycle management, maintenance workflows, and resource allocation.",
+    description: "A comprehensive enterprise asset and operations management system built for tracking resources, maintenance, and allocation workflows.",
     html_url: "https://github.com/Dhananjaya-77/ERP-Asset-Management-module",
     stargazers_count: 12,
     forks_count: 2,
@@ -71,45 +70,23 @@ const fallbackRepos: GitHubRepo[] = [
   {
     id: 2,
     name: "Flashcard-Generator",
-    description: "An interactive study companion for active recall, custom flashcard sets, and structured learning workflows.",
+    description: "An interactive study assistant for active recall and custom learning structures.",
     html_url: "https://github.com/Dhananjaya-77/Flashcard-Generator",
     stargazers_count: 8,
     forks_count: 1,
     language: "TypeScript",
-    topics: ["flashcards", "study-tools", "react"],
+    topics: ["flashcards", "study", "react"],
     updated_at: new Date().toISOString(),
   },
   {
     id: 3,
-    name: "Bus-Tracking-System",
-    description: "A real-time transit tracking and route monitoring experience for Sri Lankan bus services.",
-    html_url: "https://github.com/Dhananjaya-77/Bus-Tracking-System",
-    stargazers_count: 9,
-    forks_count: 1,
-    language: "TypeScript",
-    topics: ["bus-tracker", "maps", "transit"],
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 4,
     name: "Student-Event-Management-System",
-    description: "A campus event and registration platform for organizing events, schedules, and attendance workflows.",
+    description: "A student-focused event management platform for registration, scheduling, and attendance tracking.",
     html_url: "https://github.com/Dhananjaya-77/Student-Event-Management-System",
     stargazers_count: 7,
     forks_count: 1,
     language: "TypeScript",
-    topics: ["event-management", "campus", "attendance"],
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 5,
-    name: "Dhana-personal-portfolio-",
-    description: "This personal portfolio site built with React and Vite to showcase projects, contact info, and work samples.",
-    html_url: "https://github.com/Dhananjaya-77/Dhana-personal-portfolio-",
-    stargazers_count: 5,
-    forks_count: 0,
-    language: "TypeScript",
-    topics: ["portfolio", "react", "vite"],
+    topics: ["events", "campus", "management"],
     updated_at: new Date().toISOString(),
   },
 ];
@@ -140,26 +117,33 @@ export default function Projects() {
 
         // Filter out undesired repositories and map any specific customized URL paths
         const filtered = repoList.map(repo => {
-          if (repo.name.toLowerCase() === "erp-asset-management-module") {
+          const repoName = repo.name.toLowerCase();
+
+          if (repoName === "erp-asset-management-module" || repoName === "student-event-management-system" || repoName === "flashcard-generator") {
             return {
               ...repo,
-              html_url: "https://github.com/Hasitha123456789/ERP-Asset-Management-module.git"
+              html_url: `https://github.com/${username}/${repo.name}`,
             };
           }
+
           return repo;
         }).filter((repo) => {
           const nameLower = repo.name.toLowerCase();
           return (
             nameLower !== "branchers" &&
             nameLower !== "macports-base" &&
-            nameLower !== "dhana"
+            nameLower !== "dhana" &&
+            nameLower !== "dhana-personal-portfolio" &&
+            nameLower !== "dhana-personal-portfolio-" &&
+            nameLower !== "personal-portfolio" &&
+            nameLower !== "bus-tracking-system" &&
+            nameLower !== "sl-bus-tracker"
           );
         });
 
-        // Ensure "ERP-Asset-Management-module", "Flashcard-Generator", "SL-Bus-Tracker", and "Student-Event-Management-System" are always included in the showcase portfolio
+        // Ensure ERP-Asset-Management-module, Flashcard-Generator, and Student-Event-Management-System are always included in the showcase portfolio
         const hasERP = filtered.some(repo => repo.name.toLowerCase() === "erp-asset-management-module");
         const hasFlashcard = filtered.some(repo => repo.name.toLowerCase() === "flashcard-generator");
-        const hasBusTracker = filtered.some(repo => repo.name.toLowerCase() === "sl-bus-tracker" || repo.name.toLowerCase() === "bus-tracking-system");
         const hasEventSystem = filtered.some(repo => repo.name.toLowerCase() === "student-event-management-system" || repo.name.toLowerCase() === "eventhub" || repo.name.toLowerCase() === "student-event-management");
         
         let sorted = filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
@@ -170,8 +154,8 @@ export default function Projects() {
             id: 999999,
             name: "ERP-Asset-Management-module",
             description: "A comprehensive Enterprise Resource Planning (ERP) asset tracking and lifecycle management system. Handles automated deprecation scheduling, audits, maintenance tracking, and secure resource allocation workflows.",
-            html_url: "https://github.com/Hasitha123456789/ERP-Asset-Management-module.git",
-            stargazers_count: 1, // Add gentle representation
+            html_url: `https://github.com/${username}/ERP-Asset-Management-module`,
+            stargazers_count: 1,
             forks_count: 0,
             language: "Java",
             topics: ["erp", "asset-management", "lifecycle-tracking", "enterprise-software"],
@@ -210,37 +194,14 @@ export default function Projects() {
           }
         }
 
-        if (!hasBusTracker) {
-          // Prepend a rich synthetic item so SL-Bus-Tracker is guaranteed to showcase
-          const busTrackerFallback: GitHubRepo = {
-            id: 999997,
-            name: "SL-Bus-Tracker",
-            description: "Real-time passenger bus tracking system for transit routes in Sri Lanka. Highlights active vehicle locations, AI arrival delay metrics, OpenStreetMap live overlays, and route schedules.",
-            html_url: `https://github.com/${username}/SL-Bus-Tracker`,
-            stargazers_count: 1, // Add gentle representation
-            forks_count: 0,
-            language: "TypeScript",
-            topics: ["bus-tracker", "realtime-gps", "sri-lanka", "openstreetmap", "transit"],
-            updated_at: new Date().toISOString()
-          };
-          sorted = [busTrackerFallback, ...sorted];
-        } else {
-          // Move the SL-Bus-Tracker to the very top to give it maximum visibility
-          const busTrackerIndex = sorted.findIndex(repo => repo.name.toLowerCase() === "sl-bus-tracker" || repo.name.toLowerCase() === "bus-tracking-system");
-          if (busTrackerIndex > -1) {
-            const [busTrackerProject] = sorted.splice(busTrackerIndex, 1);
-            sorted = [busTrackerProject, ...sorted];
-          }
-        }
-
         if (!hasEventSystem) {
           // Prepend a rich synthetic item so Student-Event-Management-System is guaranteed to showcase
           const eventSystemFallback: GitHubRepo = {
             id: 999996,
             name: "Student-Event-Management-System",
-            description: "A centralized campus event management platform (EventHub) that simplifies scheduling, attendance tracking, registrations, and budget logs for student actions and workshops.",
+            description: "A centralized campus event management platform that simplifies scheduling, attendance tracking, registrations, and activity management.",
             html_url: `https://github.com/${username}/Student-Event-Management-System`,
-            stargazers_count: 1, // Add gentle representation
+            stargazers_count: 1,
             forks_count: 0,
             language: "TypeScript",
             topics: ["event-management", "campus-hub", "attendance-tracker", "react", "typescript"],
@@ -296,6 +257,81 @@ export default function Projects() {
   const formatDate = (dateString: string) => {
     const d = new Date(dateString);
     return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  };
+
+  const buildGeneratedProjectArt = (repoName: string, accent: string, secondary: string, variant: "dashboard" | "analytics" | "mobile" | "studio" = "dashboard") => {
+    const safeName = repoName.replace(/[-_]/g, " ").trim() || "Project";
+    const shortLabel = safeName
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(part => part[0]?.toUpperCase() ?? "")
+      .join("") || "PR";
+
+    const label = safeName.length > 16 ? `${safeName.slice(0, 16)}…` : safeName;
+    const panelH = variant === "mobile" ? 340 : 260;
+    const dataBars = variant === "analytics"
+      ? `<rect x="150" y="355" width="180" height="12" rx="6" fill="${accent}" opacity="0.9"/> <rect x="350" y="355" width="250" height="12" rx="6" fill="#2c313a"/> <rect x="630" y="355" width="130" height="12" rx="6" fill="#2c313a"/>`
+      : variant === "mobile"
+      ? `<rect x="150" y="350" width="260" height="18" rx="9" fill="${accent}" opacity="0.9"/> <rect x="150" y="390" width="320" height="12" rx="6" fill="#2c313a"/> <rect x="150" y="420" width="290" height="12" rx="6" fill="#2c313a"/>`
+      : `<rect x="150" y="350" width="300" height="18" rx="9" fill="${accent}" opacity="0.9"/> <rect x="150" y="390" width="720" height="14" rx="7" fill="#2c313a"/> <rect x="150" y="420" width="640" height="14" rx="7" fill="#2c313a"/> <rect x="150" y="450" width="480" height="14" rx="7" fill="#2c313a"/>`;
+
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+        <defs>
+          <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0b0d12"/>
+            <stop offset="100%" stop-color="#181b20"/>
+          </linearGradient>
+          <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="${accent}"/>
+            <stop offset="100%" stop-color="${secondary}"/>
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#bg)"/>
+        <circle cx="1040" cy="130" r="160" fill="${accent}" opacity="0.18"/>
+        <circle cx="210" cy="620" r="220" fill="${secondary}" opacity="0.12"/>
+        <rect x="80" y="90" width="1040" height="620" rx="28" fill="#101318" stroke="rgba(255,255,255,0.10)"/>
+        <rect x="120" y="140" width="250" height="110" rx="18" fill="url(#panel)"/>
+        <text x="150" y="195" fill="#fff" font-size="34" font-family="Arial, sans-serif" font-weight="700">${shortLabel}</text>
+        <text x="150" y="230" fill="#f5f5f5" font-size="18" opacity="0.9" font-family="Arial, sans-serif">PROJECT</text>
+        <rect x="750" y="160" width="260" height="${panelH}" rx="24" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255,255,255,0.14)"/>
+        <text x="880" y="250" fill="#fff" font-size="52" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700">${shortLabel}</text>
+        <rect x="790" y="310" width="180" height="12" rx="6" fill="${accent}" opacity="0.8"/>
+        <rect x="790" y="338" width="120" height="12" rx="6" fill="#2c313a"/>
+        <rect x="790" y="366" width="150" height="12" rx="6" fill="#2c313a"/>
+        ${dataBars}
+        <text x="150" y="610" fill="#f4f4f5" font-size="38" font-family="Arial, sans-serif" font-weight="700">${label}</text>
+      </svg>
+    `;
+
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  };
+
+  const getProjectPreview = (repoName: string) => {
+    const name = repoName.toLowerCase();
+
+    if (name.includes("event") || name.includes("campus")) {
+      return eventhubPreview;
+    }
+
+    if (name.includes("portfolio")) {
+      return profilePhoto;
+    }
+
+    if (name.includes("flashcard") || name.includes("collab") || name.includes("study") || name.includes("mobile")) {
+      return flashcardPreview;
+    }
+
+    if (name.includes("google") || name.includes("collab") || name.includes("notebook") || name.includes("python")) {
+      return buildGeneratedProjectArt(repoName, "#3b82f6", "#1e3a8a", "analytics");
+    }
+
+    if (name.includes("c-go") || name.includes("cgo") || name.includes("go") || name.includes("mobile")) {
+      return buildGeneratedProjectArt(repoName, "#22c55e", "#166534", "mobile");
+    }
+
+    return buildGeneratedProjectArt(repoName, "#ef4444", "#7c2d12", "dashboard");
   };
 
   return (
@@ -371,17 +407,16 @@ export default function Projects() {
               {repos.map((repo) => {
                 const isERP = repo.name.toLowerCase() === "erp-asset-management-module";
                 const isFlashcard = repo.name.toLowerCase() === "flashcard-generator";
-                const isBusTracker = repo.name.toLowerCase() === "sl-bus-tracker" || repo.name.toLowerCase() === "bus-tracking-system";
                 const isEventSystem = repo.name.toLowerCase() === "student-event-management-system" || repo.name.toLowerCase() === "eventhub" || repo.name.toLowerCase() === "student-event-management";
-                const isSpecial = isERP || isFlashcard || isBusTracker || isEventSystem;
+                const isSpecial = isERP || isFlashcard || isEventSystem;
+                const previewImage = getProjectPreview(repo.name);
+
                 return (
                   <motion.article
                     key={repo.id}
                     variants={cardVariants}
                     className={`group flex flex-col justify-between overflow-hidden rounded-xl card-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${
-                      isBusTracker
-                        ? "border-emerald-500/30 shadow-emerald-500/5 bg-[#0a1814]/70 hover:border-emerald-500"
-                        : isEventSystem
+                      isEventSystem
                         ? "border-indigo-500/30 shadow-indigo-500/5 bg-[#090b1c]/70 hover:border-indigo-500"
                         : isSpecial 
                         ? "border-[#ef4444]/40 shadow-[#ef4444]/5 bg-[#170a0d]/70 hover:border-[#ef4444]" 
@@ -389,60 +424,34 @@ export default function Projects() {
                     }`}
                   >
                     <div>
-                      {isFlashcard && (
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                        aria-label={`Open ${repo.name} on GitHub`}
+                      >
                         <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
                           <ProjectImage
-                            primarySrc={flashcardPreview}
-                            fallbackSrc={flashcardPreview}
-                            alt="AI Flashcard Generator Preview"
+                            primarySrc={previewImage}
+                            fallbackSrc={previewImage}
+                            alt={`${repo.name} preview`}
                           />
                         </div>
-                      )}
-
-                      {isBusTracker && (
-                        <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
-                          <ProjectImage
-                            primarySrc={busTrackerPreview}
-                            fallbackSrc={busTrackerMapPreview}
-                            alt="SL Bus Tracker Preview"
-                          />
-                        </div>
-                      )}
-
-                      {isERP && (
-                        <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
-                          <ProjectImage
-                            primarySrc={erpDashboardPreview}
-                            fallbackSrc={erpDashboardPreview}
-                            alt="ERP Asset Management Dashboard Preview"
-                          />
-                        </div>
-                      )}
-
-                      {isEventSystem && (
-                        <div className="relative aspect-[16/9] w-[calc(100%+3rem)] max-w-none overflow-hidden bg-zinc-950 border-b border-white/5 rounded-t-xl -mt-6 -mx-6 mb-4">
-                          <ProjectImage
-                            primarySrc={eventhubPreview}
-                            fallbackSrc={eventhubPreview}
-                            alt="Student Event Management System Preview"
-                          />
-                        </div>
-                      )}
+                      </a>
 
                       {/* Top Language Stamp & Header */}
                       <div className="flex items-center justify-between mb-3 text-[10px] font-mono tracking-widest uppercase">
                         <span className={`font-semibold flex items-center space-x-1 ${
-                          isBusTracker ? "text-emerald-400" : isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
+                          isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
                         }`}>
                           <span className={`w-1.5 h-1.5 rounded-full inline-block mr-1 ${
-                            isBusTracker ? "bg-emerald-400" : isEventSystem ? "bg-indigo-400" : "bg-[#ef4444]"
+                            isEventSystem ? "bg-indigo-400" : "bg-[#ef4444]"
                           }`}></span>
                           {repo.language || "Web Asset"}
                           {isSpecial && (
                             <span className={`ml-2 px-2 py-0.5 rounded text-[8px] tracking-widest font-sans font-bold uppercase ${
-                              isBusTracker 
-                                ? "bg-emerald-500/20 text-emerald-400" 
-                                : isEventSystem
+                              isEventSystem
                                 ? "bg-indigo-500/20 text-indigo-400"
                                 : "bg-[#ef4444]/20 text-[#ef4444]"
                             }`}>
@@ -458,9 +467,16 @@ export default function Projects() {
 
                       {/* Title of GitHub Repo */}
                       <h3 className={`text-lg font-bold text-white transition-colors duration-200 ${
-                        isBusTracker ? "group-hover:text-emerald-400" : isEventSystem ? "group-hover:text-indigo-400" : "group-hover:text-[#ef4444]"
+                        isEventSystem ? "group-hover:text-indigo-400" : "group-hover:text-[#ef4444]"
                       }`}>
-                        {repo.name}
+                        <a
+                          href={repo.html_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline"
+                        >
+                          {repo.name}
+                        </a>
                       </h3>
 
                       {/* Description */}
@@ -501,7 +517,7 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`inline-flex items-center space-x-1 text-xs transition-all hover:text-white font-semibold font-sans ${
-                          isBusTracker ? "text-emerald-400" : isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
+                          isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
                         }`}
                       >
                         <span>Explore Repo</span>
