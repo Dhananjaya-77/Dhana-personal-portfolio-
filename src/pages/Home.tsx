@@ -1,8 +1,117 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Shield, GraduationCap, ChevronDown } from "lucide-react";
 import profilePhoto from "../assets/images/profile_photo.jpg";
 
+const LINE_1_TEXT = "Ayubowan! I am";
+const LINE_2_TEXT = "Hasitha Dhananjaya";
+const LINE_3_PART1 = "IT Undergraduate";
+const LINE_3_PART2 = "IT Support Engineer";
+const LINE_3_TOTAL_STEPS = LINE_3_PART1.length + 1 + LINE_3_PART2.length;
+
 export default function Home() {
+  const [line1, setLine1] = useState("");
+  const [line2, setLine2] = useState("");
+  const [line3Count, setLine3Count] = useState(0);
+  const [activeLine, setActiveLine] = useState<1 | 2 | 3>(1);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      // TYPING FORWARD
+      if (activeLine === 1) {
+        if (line1.length < LINE_1_TEXT.length) {
+          timer = setTimeout(() => {
+            setLine1(LINE_1_TEXT.slice(0, line1.length + 1));
+          }, 45);
+        } else {
+          timer = setTimeout(() => {
+            setActiveLine(2);
+          }, 260);
+        }
+      } else if (activeLine === 2) {
+        if (line2.length < LINE_2_TEXT.length) {
+          timer = setTimeout(() => {
+            setLine2(LINE_2_TEXT.slice(0, line2.length + 1));
+          }, 55);
+        } else {
+          timer = setTimeout(() => {
+            setActiveLine(3);
+          }, 280);
+        }
+      } else if (activeLine === 3) {
+        if (line3Count < LINE_3_TOTAL_STEPS) {
+          timer = setTimeout(() => {
+            setLine3Count((prev) => prev + 1);
+          }, 32);
+        } else {
+          // Pause when all lines are typed out so the user can comfortably read
+          timer = setTimeout(() => {
+            setIsDeleting(true);
+          }, 3200);
+        }
+      }
+    } else {
+      // DELETING BACKWARD (LOOP BACKSPACE)
+      if (activeLine === 3) {
+        if (line3Count > 0) {
+          timer = setTimeout(() => {
+            setLine3Count((prev) => prev - 1);
+          }, 18);
+        } else {
+          timer = setTimeout(() => {
+            setActiveLine(2);
+          }, 120);
+        }
+      } else if (activeLine === 2) {
+        if (line2.length > 0) {
+          timer = setTimeout(() => {
+            setLine2((prev) => prev.slice(0, -1));
+          }, 22);
+        } else {
+          timer = setTimeout(() => {
+            setActiveLine(1);
+          }, 120);
+        }
+      } else if (activeLine === 1) {
+        if (line1.length > 0) {
+          timer = setTimeout(() => {
+            setLine1((prev) => prev.slice(0, -1));
+          }, 25);
+        } else {
+          // Brief pause on empty before restarting the loop
+          timer = setTimeout(() => {
+            setIsDeleting(false);
+            setActiveLine(1);
+          }, 500);
+        }
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [activeLine, isDeleting, line1, line2, line3Count]);
+
+  const renderLine3 = () => {
+    if (line3Count === 0) return null;
+
+    const p1Len = LINE_3_PART1.length;
+    const p1 = LINE_3_PART1.slice(0, Math.min(line3Count, p1Len));
+    const showAmp = line3Count > p1Len;
+    const p2Count = Math.max(0, line3Count - (p1Len + 1));
+    const p2 = LINE_3_PART2.slice(0, p2Count);
+
+    return (
+      <span className="inline-flex items-center flex-wrap">
+        <span className="text-zinc-300">{p1}</span>
+        {showAmp && (
+          <span className="text-[#ef4444] font-semibold mx-1.5">&amp;</span>
+        )}
+        {p2Count > 0 && <span className="text-zinc-300">{p2}</span>}
+      </span>
+    );
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -64,21 +173,39 @@ export default function Home() {
             <div className="space-y-6 lg:col-span-7 z-10">
 
               <div className="space-y-4">
-                <motion.h4 variants={itemVariants} className="font-mono text-xs md:text-sm tracking-wider uppercase text-[#a3a3a3] flex items-center gap-1.5">
-                  <span className="w-4 h-[1px] bg-red-500"></span> Ayubowan! I am
+                <motion.h4 
+                  variants={itemVariants} 
+                  aria-label={LINE_1_TEXT}
+                  className="font-mono text-xs md:text-sm tracking-wider uppercase text-[#a3a3a3] flex items-center gap-1.5 min-h-[1.5em]"
+                >
+                  <span className="w-4 h-[1px] bg-red-500 shrink-0"></span>
+                  <span>{line1}</span>
+                  {activeLine === 1 && (
+                    <span aria-hidden="true" className="inline-block w-[2px] h-[1.1em] bg-red-500 animate-blink ml-0.5" />
+                  )}
                 </motion.h4>
                 <motion.h1 
                   id="hero-title"
                   variants={itemVariants} 
-                  className="bg-gradient-to-r from-white via-zinc-250 to-[#ef4444] bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl"
+                  aria-label={LINE_2_TEXT}
+                  className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl min-h-[1.15em] flex items-center flex-wrap"
                 >
-                  Hasitha Dhananjaya
+                  <span className="bg-gradient-to-r from-white via-zinc-200 to-[#ef4444] bg-clip-text text-transparent">
+                    {line2}
+                  </span>
+                  {activeLine === 2 && (
+                    <span aria-hidden="true" className="inline-block w-[3px] md:w-[4px] h-[0.85em] ml-1.5 bg-[#ef4444] animate-blink align-middle" />
+                  )}
                 </motion.h1>
                 <motion.p 
                   variants={itemVariants} 
-                  className="font-sans text-lg md:text-xl font-medium text-zinc-300"
+                  aria-label="IT Undergraduate & IT Support Engineer"
+                  className="font-sans text-lg md:text-xl font-medium min-h-[1.6em] flex items-center flex-wrap"
                 >
-                  IT Undergraduate <span className="text-[#ef4444] font-semibold">&amp;</span> IT Support Engineer
+                  {renderLine3()}
+                  {activeLine === 3 && (
+                    <span aria-hidden="true" className="inline-block w-[2px] h-[1em] ml-1 bg-[#ef4444] animate-blink" />
+                  )}
                 </motion.p>
               </div>
 
@@ -138,7 +265,7 @@ export default function Home() {
                     <Shield className="h-4 w-4 text-[#ef4444] transition-transform group-hover:scale-110" />
                     <span className="font-mono text-[#a3a3a3] text-[10px] tracking-widest uppercase group-hover:text-white transition-colors">Aspirations</span>
                   </div>
-                  <p className="text-xs md:text-sm font-semibold text-zinc-300">Network & Cyber</p>
+                  <p className="text-xs md:text-sm font-semibold text-zinc-300">IT Support Engineer</p>
                 </div>
               </motion.div>
             </div>

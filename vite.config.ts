@@ -3,11 +3,9 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(({ mode }) => {
-  const repoName = 'Dhana-personal-portfolio-';
-
+export default defineConfig(() => {
   return {
-    base: mode === 'production' ? `/${repoName}/` : '/',
+    base: '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
