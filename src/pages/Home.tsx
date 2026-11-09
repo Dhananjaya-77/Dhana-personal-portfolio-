@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
-import { ArrowRight, Code, Shield, GraduationCap } from "lucide-react";
+import { ArrowRight, Shield, GraduationCap, ChevronDown } from "lucide-react";
 import profilePhoto from "../assets/images/profile_photo.jpg";
 
 export default function Home() {
@@ -79,7 +78,7 @@ export default function Home() {
                   variants={itemVariants} 
                   className="font-sans text-lg md:text-xl font-medium text-zinc-300"
                 >
-                  Undergraduate Student <span className="text-[#ef4444] font-semibold">&amp;</span> Full-Stack Developer
+                  IT Undergraduate <span className="text-[#ef4444] font-semibold">&amp;</span> IT Support Engineer
                 </motion.p>
               </div>
 
@@ -87,7 +86,7 @@ export default function Home() {
                 variants={itemVariants} 
                 className="max-w-2xl text-sm md:text-base text-[#a3a3a3] leading-relaxed"
               >
-                Passionate about engineering reliable, scalable full-stack applications and integrating human-centered design (HCI) concepts. Specializing in React, Node.js, and Java to solve complex digital puzzles.
+                Second-year Information Technology undergraduate seeking an IT Support Engineer Intern role. Experienced with network troubleshooting, Windows and Linux systems, Cisco Packet Tracer, cloud fundamentals, and enterprise software projects.
               </motion.p>
 
               {/* Action Buttons */}
@@ -95,27 +94,37 @@ export default function Home() {
                 variants={itemVariants} 
                 className="flex flex-wrap items-center gap-4 pt-2"
               >
-                <Link
-                  to="/projects"
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#projects");
+                  }}
                   id="hero-cta-btn"
-                  className="group relative inline-flex items-center justify-center rounded-md bg-[#ef4444] text-black font-bold tracking-wider px-8 py-3.5 text-xs uppercase shadow-lg shadow-[#ef4444]/20 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[#ef4444]/30 active:scale-[0.98]"
+                  className="group relative inline-flex items-center justify-center rounded-md bg-[#ef4444] text-black font-bold tracking-wider px-8 py-3.5 text-xs uppercase shadow-lg shadow-[#ef4444]/20 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[#ef4444]/30 active:scale-[0.98] cursor-pointer"
                 >
                   <span>View My Projects</span>
                   <ArrowRight className="ml-2 h-4 w-4 text-black transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  to="/contact"
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#contact");
+                  }}
                   id="hero-secondary-btn"
-                  className="inline-flex items-center justify-center rounded-md border border-[#a3a3a3] bg-transparent text-white hover:border-[#ef4444] hover:text-[#ef4444] transition-all px-8 py-3.5 text-xs uppercase tracking-wider hover:bg-[#ef4444]/5"
+                  className="inline-flex items-center justify-center rounded-md border border-[#a3a3a3] bg-transparent text-white hover:border-[#ef4444] hover:text-[#ef4444] transition-all px-8 py-3.5 text-xs uppercase tracking-wider hover:bg-[#ef4444]/5 cursor-pointer"
                 >
                   Let's Connect
-                </Link>
+                </a>
               </motion.div>
 
               {/* Quick Highlighting Metrics */}
               <motion.div 
                 variants={itemVariants}
-                className="grid grid-cols-3 gap-4 border-t border-white/5 pt-8"
+                className="grid grid-cols-2 gap-4 border-t border-white/5 pt-8 max-w-md"
               >
                 <div className="space-y-1 group cursor-default">
                   <div className="flex items-center space-x-1.5">
@@ -126,17 +135,10 @@ export default function Home() {
                 </div>
                 <div className="space-y-1 group cursor-default">
                   <div className="flex items-center space-x-1.5">
-                    <Code className="h-4 w-4 text-[#ef4444] transition-transform group-hover:scale-110" />
-                    <span className="font-mono text-[#a3a3a3] text-[10px] tracking-widest uppercase group-hover:text-white transition-colors">Tech Stack</span>
-                  </div>
-                  <p className="text-xs md:text-sm font-semibold text-zinc-300">React, Node, Java</p>
-                </div>
-                <div className="space-y-1 group cursor-default">
-                  <div className="flex items-center space-x-1.5">
                     <Shield className="h-4 w-4 text-[#ef4444] transition-transform group-hover:scale-110" />
                     <span className="font-mono text-[#a3a3a3] text-[10px] tracking-widest uppercase group-hover:text-white transition-colors">Aspirations</span>
                   </div>
-                  <p className="text-xs md:text-sm font-semibold text-zinc-300">Software & Cyber</p>
+                  <p className="text-xs md:text-sm font-semibold text-zinc-300">Network & Cyber</p>
                 </div>
               </motion.div>
             </div>
@@ -163,6 +165,21 @@ export default function Home() {
               </motion.div>
             </div>
           </motion.div>
+
+          {/* Strolling Indicator */}
+          <div className="mt-16 flex justify-center">
+            <button
+              onClick={() => {
+                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                window.history.pushState(null, "", "#about");
+              }}
+              className="flex flex-col items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-[#a3a3a3] hover:text-[#ef4444] transition-colors cursor-pointer group"
+              aria-label="Scroll down to About section"
+            >
+              <span>Scroll to Explore</span>
+              <ChevronDown className="h-4 w-4 animate-bounce text-[#ef4444] group-hover:translate-y-0.5 transition-transform" />
+            </button>
+          </div>
         </div>
       </section>
     </main>

@@ -15,6 +15,11 @@
   --accent-glow: rgba(239, 68, 68, 0.4);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--charcoal);

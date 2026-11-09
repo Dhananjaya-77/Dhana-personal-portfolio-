@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import flashcardPreview from "../assets/images/flashcard_preview_1781120529761.png";
+import enterpriseNetworkPreview from "../assets/images/enterprise_network_simulation.png";
+import enterpriseLanWlanPreview from "../assets/images/enterprise_lan_wlan_simulation.png";
+import networkAutomationPreview from "../assets/images/network_automation_toolkit.png";
+import secureCloudPreview from "../assets/images/secure_cloud_network.png";
+import cgoMobilePreview from "../assets/images/cgo_mobile_preview.png";
+import busTrackerPreview from "../assets/images/bus_tracking_system_lite.png";
+import flashcardPreview from "../assets/images/flashcard_generator_preview.png";
 import erpDashboardPreview from "../assets/images/erp_dashboard_1781123885443.png";
 import eventhubPreview from "../assets/images/eventhub_preview_1781160769870.png";
 import profilePhoto from "../assets/images/profile_photo.jpg";
+import theSunPreview from "../assets/images/the_sun_preview.png";
 import { 
   Github, 
   ExternalLink, 
-  Sparkles, 
   Star, 
   GitFork, 
   Calendar, 
@@ -30,11 +36,13 @@ interface GitHubRepo {
 function ProjectImage({ 
   primarySrc, 
   fallbackSrc, 
-  alt 
+  alt,
+  contain = false
 }: { 
   primarySrc: string; 
   fallbackSrc: string; 
   alt: string; 
+  contain?: boolean;
 }) {
   const [src, setSrc] = useState(primarySrc);
   const [triedFallback, setTriedFallback] = useState(false);
@@ -43,7 +51,7 @@ function ProjectImage({
     <img
       src={src}
       alt={alt}
-      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+      className={`h-full w-full ${contain ? "object-contain py-2 bg-gradient-to-b from-[#091522] via-[#050b12] to-[#020508]" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-[1.03]`}
       referrerPolicy="no-referrer"
       onError={() => {
         if (!triedFallback) {
@@ -58,13 +66,68 @@ function ProjectImage({
 const fallbackRepos: GitHubRepo[] = [
   {
     id: 1,
-    name: "ERP-Asset-Management-module",
-    description: "A comprehensive enterprise asset and operations management system built for tracking resources, maintenance, and allocation workflows.",
-    html_url: "https://github.com/Dhananjaya-77/ERP-Asset-Management-module",
-    stargazers_count: 12,
-    forks_count: 2,
-    language: "Java",
-    topics: ["erp", "enterprise", "asset-management"],
+    name: "Enterprise-Network-Simulation",
+    description: "An interactive enterprise network simulation showcasing topology design, VLAN segmentation, HSRP redundancy failover, NAT/PAT, OSPF routing, and ACL security policies.",
+    html_url: "https://github.com/Dhananjaya-77/Enterprise-Network-Simulation",
+    stargazers_count: 5,
+    forks_count: 1,
+    language: "HTML",
+    topics: ["networking", "cisco-packet-tracer", "hsrp", "vlan", "ospf"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 4,
+    name: "Enterprise-LAN-WLAN-Simulation",
+    description: "Interactive enterprise campus network studio simulating a multi-tier backbone, VLSM subnetting engine, 802.11ax Wi-Fi RF heatmaps, VLANs, and WLC controllers.",
+    html_url: "https://github.com/Dhananjaya-77/Enterprise-LAN-WLAN-Simulation",
+    stargazers_count: 6,
+    forks_count: 1,
+    language: "TypeScript",
+    topics: ["networking", "wlan", "vlsm", "wifi-6", "vlan", "cisco"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 6,
+    name: "Network-Automation-Toolkit",
+    description: "Modular multi-vendor network automation toolkit built with Python, Netmiko, Jinja2, and Typer for configuration generation, state auditing, drift detection, and automated playbooks.",
+    html_url: "https://github.com/Dhananjaya-77/Network-Automation-Toolkit",
+    stargazers_count: 6,
+    forks_count: 1,
+    language: "Python",
+    topics: ["network-automation", "python", "netmiko", "jinja2", "cisco"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 5,
+    name: "Bus-Tracking-System-lite",
+    description: "A real-time transit and bus tracking platform featuring interactive live maps, route filtering, active passenger counts, and dedicated driver/admin portals.",
+    html_url: "https://github.com/Dhananjaya-77/Bus-Tracking-System-lite",
+    stargazers_count: 6,
+    forks_count: 1,
+    language: "JavaScript",
+    topics: ["transit-map", "bus-tracking", "geolocation", "real-time"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 7,
+    name: "C-GO-Mobile",
+    description: "Secure transit and container tracking mobile application with dedicated role portals for truck drivers, container owners, and Sri Lanka customs inspectors.",
+    html_url: "https://github.com/Dhananjaya-77/C-GO-Mobile",
+    stargazers_count: 6,
+    forks_count: 1,
+    language: "TypeScript",
+    topics: ["mobile-app", "logistics", "cargo-tracking", "react-native", "transit-security"],
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 8,
+    name: "Secure-Cloud-Network",
+    description: "Production-ready, hardened 3-tier multi-AZ AWS Virtual Private Cloud (VPC) architecture built with Terraform, featuring ALB, NAT Gateways, CIS benchmarks, and VPC Flow Logs.",
+    html_url: "https://github.com/Dhananjaya-77/Secure-Cloud-Network",
+    stargazers_count: 6,
+    forks_count: 1,
+    language: "Terraform",
+    topics: ["aws", "terraform", "vpc", "cloud-security", "iac", "devops"],
     updated_at: new Date().toISOString(),
   },
   {
@@ -137,37 +200,218 @@ export default function Projects() {
             nameLower !== "dhana-personal-portfolio-" &&
             nameLower !== "personal-portfolio" &&
             nameLower !== "bus-tracking-system" &&
-            nameLower !== "sl-bus-tracker"
+            nameLower !== "sl-bus-tracker" &&
+            nameLower !== "my-static-webapp-pro" &&
+            nameLower !== "google-collab" &&
+            nameLower !== "erp-asset-management-module" &&
+            nameLower !== "cgo"
           );
         });
 
-        // Ensure ERP-Asset-Management-module, Flashcard-Generator, and Student-Event-Management-System are always included in the showcase portfolio
-        const hasERP = filtered.some(repo => repo.name.toLowerCase() === "erp-asset-management-module");
+        // Ensure Flashcard-Generator and Student-Event-Management-System are always included in the showcase portfolio
         const hasFlashcard = filtered.some(repo => repo.name.toLowerCase() === "flashcard-generator");
         const hasEventSystem = filtered.some(repo => repo.name.toLowerCase() === "student-event-management-system" || repo.name.toLowerCase() === "eventhub" || repo.name.toLowerCase() === "student-event-management");
+        const hasNetworkSim = filtered.some(repo => repo.name.toLowerCase() === "enterprise-network-simulation" || (repo.name.toLowerCase().includes("enterprise-network") && !repo.name.toLowerCase().includes("lan-wlan")));
+        const hasLanWlanSim = filtered.some(repo => repo.name.toLowerCase().includes("lan-wlan") || repo.name.toLowerCase().includes("lan_wlan") || repo.name.toLowerCase() === "enterprise-lan-wlan-simulation");
+        const hasNetworkToolkit = filtered.some(repo => repo.name.toLowerCase().includes("network-automation-toolkit") || repo.name.toLowerCase() === "network-automation-toolkit");
         
         let sorted = filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
 
-        if (!hasERP) {
-          // Prepend a rich synthetic item so ERP-Asset-Management-module is guaranteed to showcase even in case of fetch/profile states
-          const erpFallback: GitHubRepo = {
-            id: 999999,
-            name: "ERP-Asset-Management-module",
-            description: "A comprehensive Enterprise Resource Planning (ERP) asset tracking and lifecycle management system. Handles automated deprecation scheduling, audits, maintenance tracking, and secure resource allocation workflows.",
-            html_url: `https://github.com/${username}/ERP-Asset-Management-module`,
-            stargazers_count: 1,
-            forks_count: 0,
-            language: "Java",
-            topics: ["erp", "asset-management", "lifecycle-tracking", "enterprise-software"],
+        if (!hasNetworkToolkit) {
+          const networkToolkitFallback: GitHubRepo = {
+            id: 999992,
+            name: "Network-Automation-Toolkit",
+            description: "Modular multi-vendor network automation toolkit built with Python, Netmiko, Jinja2, and Typer for configuration generation, state auditing, drift detection, and automated playbooks.",
+            html_url: `https://github.com/${username}/Network-Automation-Toolkit`,
+            stargazers_count: 5,
+            forks_count: 1,
+            language: "Python",
+            topics: ["network-automation", "python", "netmiko", "jinja2", "cisco"],
             updated_at: new Date().toISOString()
           };
-          sorted = [erpFallback, ...sorted];
+          sorted = [networkToolkitFallback, ...sorted];
         } else {
-          // Move the ERP-Asset-Management-module to the very top to give it maximum visibility
-          const erpIndex = sorted.findIndex(repo => repo.name.toLowerCase() === "erp-asset-management-module");
-          if (erpIndex > -1) {
-            const [erpProject] = sorted.splice(erpIndex, 1);
-            sorted = [erpProject, ...sorted];
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("network-automation-toolkit") || repo.name.toLowerCase() === "network-automation-toolkit") {
+              return {
+                ...repo,
+                description: repo.description || "Modular multi-vendor network automation toolkit built with Python, Netmiko, Jinja2, and Typer for configuration generation, state auditing, drift detection, and automated playbooks.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["network-automation", "python", "netmiko", "jinja2", "cisco"],
+                language: repo.language || "Python",
+              };
+            }
+            return repo;
+          });
+          const toolkitIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("network-automation-toolkit") || repo.name.toLowerCase() === "network-automation-toolkit");
+          if (toolkitIndex > -1) {
+            const [toolkitProject] = sorted.splice(toolkitIndex, 1);
+            sorted = [toolkitProject, ...sorted];
+          }
+        }
+
+        if (!hasNetworkSim) {
+          const networkSimFallback: GitHubRepo = {
+            id: 999995,
+            name: "Enterprise-Network-Simulation",
+            description: "Interactive enterprise network topology simulator featuring VLAN segmentation, HSRP redundancy failover, NAT/PAT, OSPF routing, and ACL security policies.",
+            html_url: `https://github.com/${username}/Enterprise-Network-Simulation`,
+            stargazers_count: 5,
+            forks_count: 1,
+            language: "HTML",
+            topics: ["networking", "cisco-packet-tracer", "hsrp", "vlan", "ospf"],
+            updated_at: new Date().toISOString()
+          };
+          sorted = [networkSimFallback, ...sorted];
+        } else {
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("enterprise-network") && !repo.name.toLowerCase().includes("lan-wlan")) {
+              return {
+                ...repo,
+                description: repo.description || "Interactive enterprise network topology simulator featuring VLAN segmentation, HSRP redundancy failover, NAT/PAT, OSPF routing, and ACL security policies.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["networking", "cisco-packet-tracer", "hsrp", "vlan", "ospf"],
+                language: repo.language || "HTML",
+              };
+            }
+            return repo;
+          });
+          const netIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("enterprise-network") && !repo.name.toLowerCase().includes("lan-wlan"));
+          if (netIndex > -1) {
+            const [netProject] = sorted.splice(netIndex, 1);
+            sorted = [netProject, ...sorted];
+          }
+        }
+
+        if (!hasLanWlanSim) {
+          const lanWlanFallback: GitHubRepo = {
+            id: 999994,
+            name: "Enterprise-LAN-WLAN-Simulation",
+            description: "Interactive enterprise campus network studio simulating a multi-tier backbone, VLSM subnetting engine, 802.11ax Wi-Fi RF heatmaps, VLANs, and WLC controllers.",
+            html_url: `https://github.com/${username}/Enterprise-LAN-WLAN-Simulation`,
+            stargazers_count: 6,
+            forks_count: 1,
+            language: "TypeScript",
+            topics: ["networking", "wlan", "vlsm", "wifi-6", "vlan", "cisco"],
+            updated_at: new Date().toISOString()
+          };
+          sorted = [lanWlanFallback, ...sorted];
+        } else {
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("lan-wlan") || repo.name.toLowerCase().includes("lan_wlan") || repo.name.toLowerCase() === "enterprise-lan-wlan-simulation") {
+              return {
+                ...repo,
+                description: repo.description || "Interactive enterprise campus network studio simulating a multi-tier backbone, VLSM subnetting engine, 802.11ax Wi-Fi RF heatmaps, VLANs, and WLC controllers.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["networking", "wlan", "vlsm", "wifi-6", "vlan", "cisco"],
+                language: repo.language || "TypeScript",
+              };
+            }
+            return repo;
+          });
+          const lanIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("lan-wlan") || repo.name.toLowerCase().includes("lan_wlan") || repo.name.toLowerCase() === "enterprise-lan-wlan-simulation");
+          if (lanIndex > -1) {
+            const [lanProject] = sorted.splice(lanIndex, 1);
+            sorted = [lanProject, ...sorted];
+          }
+        }
+
+        const hasBusTracker = filtered.some(repo => repo.name.toLowerCase().includes("bus-tracking-system-lite") || repo.name.toLowerCase() === "bus-tracking-system-lite");
+
+        if (!hasBusTracker) {
+          const busTrackerFallback: GitHubRepo = {
+            id: 999993,
+            name: "Bus-Tracking-System-lite",
+            description: "A real-time transit and bus tracking platform featuring interactive live maps, route filtering, active passenger counts, and dedicated driver/admin portals.",
+            html_url: `https://github.com/${username}/Bus-Tracking-System-lite`,
+            stargazers_count: 6,
+            forks_count: 1,
+            language: "JavaScript",
+            topics: ["transit-map", "bus-tracking", "geolocation", "real-time"],
+            updated_at: new Date().toISOString()
+          };
+          sorted = [busTrackerFallback, ...sorted];
+        } else {
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("bus-tracking-system-lite")) {
+              return {
+                ...repo,
+                description: repo.description || "A real-time transit and bus tracking platform featuring interactive live maps, route filtering, active passenger counts, and dedicated driver/admin portals.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["transit-map", "bus-tracking", "geolocation", "real-time"],
+                language: repo.language === "Jupyter Notebook" ? "JavaScript" : (repo.language || "JavaScript"),
+              };
+            }
+            return repo;
+          });
+          const busIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("bus-tracking-system-lite"));
+          if (busIndex > -1) {
+            const [busProject] = sorted.splice(busIndex, 1);
+            sorted = [busProject, ...sorted];
+          }
+        }
+
+        const hasCGOMobile = filtered.some(repo => repo.name.toLowerCase().includes("c-go") || repo.name.toLowerCase() === "cgo-mobile");
+
+        if (!hasCGOMobile) {
+          const cgoMobileFallback: GitHubRepo = {
+            id: 999991,
+            name: "C-GO-Mobile",
+            description: "Secure transit and container tracking mobile application with dedicated role portals for truck drivers, container owners, and Sri Lanka customs inspectors.",
+            html_url: `https://github.com/${username}/C-GO-Mobile`,
+            stargazers_count: 6,
+            forks_count: 1,
+            language: "TypeScript",
+            topics: ["mobile-app", "logistics", "cargo-tracking", "react-native", "transit-security"],
+            updated_at: new Date().toISOString()
+          };
+          sorted = [cgoMobileFallback, ...sorted];
+        } else {
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("c-go") || repo.name.toLowerCase() === "cgo-mobile") {
+              return {
+                ...repo,
+                description: repo.description || "Secure transit and container tracking mobile application with dedicated role portals for truck drivers, container owners, and Sri Lanka customs inspectors.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["mobile-app", "logistics", "cargo-tracking", "react-native", "transit-security"],
+                language: repo.language || "TypeScript",
+              };
+            }
+            return repo;
+          });
+          const cgoIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("c-go") || repo.name.toLowerCase() === "cgo-mobile");
+          if (cgoIndex > -1) {
+            const [cgoProject] = sorted.splice(cgoIndex, 1);
+            sorted = [cgoProject, ...sorted];
+          }
+        }
+
+        const hasCloudNetwork = filtered.some(repo => repo.name.toLowerCase().includes("secure-cloud-network") || repo.name.toLowerCase() === "secure-cloud-network" || (repo.name.toLowerCase().includes("secure") && repo.name.toLowerCase().includes("cloud")));
+
+        if (!hasCloudNetwork) {
+          const cloudNetworkFallback: GitHubRepo = {
+            id: 999990,
+            name: "Secure-Cloud-Network",
+            description: "Production-ready, hardened 3-tier multi-AZ AWS Virtual Private Cloud (VPC) architecture built with Terraform, featuring ALB, NAT Gateways, CIS benchmarks, and VPC Flow Logs.",
+            html_url: `https://github.com/${username}/Secure-Cloud-Network`,
+            stargazers_count: 6,
+            forks_count: 1,
+            language: "Terraform",
+            topics: ["aws", "terraform", "vpc", "cloud-security", "iac", "devops"],
+            updated_at: new Date().toISOString()
+          };
+          sorted = [cloudNetworkFallback, ...sorted];
+        } else {
+          sorted = sorted.map(repo => {
+            if (repo.name.toLowerCase().includes("secure-cloud-network") || (repo.name.toLowerCase().includes("secure") && repo.name.toLowerCase().includes("cloud"))) {
+              return {
+                ...repo,
+                description: repo.description || "Production-ready, hardened 3-tier multi-AZ AWS Virtual Private Cloud (VPC) architecture built with Terraform, featuring ALB, NAT Gateways, CIS benchmarks, and VPC Flow Logs.",
+                topics: repo.topics && repo.topics.length > 0 ? repo.topics : ["aws", "terraform", "vpc", "cloud-security", "iac", "devops"],
+                language: "Terraform",
+              };
+            }
+            return repo;
+          });
+          const cloudIndex = sorted.findIndex(repo => repo.name.toLowerCase().includes("secure-cloud-network") || (repo.name.toLowerCase().includes("secure") && repo.name.toLowerCase().includes("cloud")));
+          if (cloudIndex > -1) {
+            const [cloudProject] = sorted.splice(cloudIndex, 1);
+            sorted = [cloudProject, ...sorted];
           }
         }
 
@@ -311,6 +555,64 @@ export default function Projects() {
   const getProjectPreview = (repoName: string) => {
     const name = repoName.toLowerCase();
 
+    if (
+      name.includes("secure-cloud") ||
+      name.includes("secure_cloud") ||
+      name.includes("cloud-network") ||
+      name.includes("cloud_network") ||
+      (name.includes("cloud") && name.includes("network")) ||
+      name === "secure-cloud-network"
+    ) {
+      return secureCloudPreview;
+    }
+
+    if (
+      name.includes("c-go") ||
+      name.includes("cgo") ||
+      name.includes("secure-transit") ||
+      name.includes("securetrack")
+    ) {
+      return cgoMobilePreview;
+    }
+
+    if (
+      name.includes("network-automation") ||
+      name.includes("network_automation") ||
+      name.includes("automation-toolkit") ||
+      name.includes("automation_toolkit") ||
+      (name.includes("network") && name.includes("toolkit")) ||
+      (name.includes("network") && name.includes("automation"))
+    ) {
+      return networkAutomationPreview;
+    }
+
+    if (
+      name.includes("lan-wlan") ||
+      name.includes("lan_wlan") ||
+      (name.includes("lan") && name.includes("wlan")) ||
+      name.includes("wlan")
+    ) {
+      return enterpriseLanWlanPreview;
+    }
+
+    if (
+      name.includes("enterprise-network") ||
+      name.includes("enterprise_network") ||
+      name.includes("network-simulation") ||
+      name.includes("network_simulation") ||
+      (name.includes("enterprise") && name.includes("network"))
+    ) {
+      return enterpriseNetworkPreview;
+    }
+
+    if (name.includes("bus-tracking") || name.includes("bus_tracking") || name.includes("bus-tracker")) {
+      return busTrackerPreview;
+    }
+
+    if (name.includes("the-sun") || name === "the sun") {
+      return theSunPreview;
+    }
+
     if (name.includes("event") || name.includes("campus")) {
       return eventhubPreview;
     }
@@ -319,7 +621,7 @@ export default function Projects() {
       return profilePhoto;
     }
 
-    if (name.includes("flashcard") || name.includes("collab") || name.includes("study") || name.includes("mobile")) {
+    if (name.includes("flashcard") || name.includes("study")) {
       return flashcardPreview;
     }
 
@@ -335,7 +637,7 @@ export default function Projects() {
   };
 
   return (
-    <main id="projects-page" className="flex-grow py-12 md:py-20">
+    <section id="projects" className="scroll-mt-20 py-16 md:py-24 border-t border-rose-500/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Header section with styling consistent with About page */}
@@ -348,10 +650,6 @@ export default function Projects() {
               <p className="mt-2 text-[#a3a3a3]">
                 Explore live projects fetched dynamically from Hasitha's GitHub profile.
               </p>
-            </div>
-            <div className="hidden md:flex items-center space-x-2 text-sm text-[#a3a3a3] bg-[#0c0c0f] px-3.5 py-1.5 rounded-full border border-rose-500/10 card-surface shadow-sm font-mono">
-              <Sparkles className="h-4 w-4 text-[#ef4444]" />
-              <span>HCI Best Practices Implemented</span>
             </div>
           </div>
         </div>
@@ -401,14 +699,21 @@ export default function Projects() {
             <motion.div 
               variants={containerVariants}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.05 }}
               className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             >
               {repos.map((repo) => {
                 const isERP = repo.name.toLowerCase() === "erp-asset-management-module";
                 const isFlashcard = repo.name.toLowerCase() === "flashcard-generator";
                 const isEventSystem = repo.name.toLowerCase() === "student-event-management-system" || repo.name.toLowerCase() === "eventhub" || repo.name.toLowerCase() === "student-event-management";
-                const isSpecial = isERP || isFlashcard || isEventSystem;
+                const isNetworkAuto = repo.name.toLowerCase().includes("network-automation") || repo.name.toLowerCase().includes("automation-toolkit") || (repo.name.toLowerCase().includes("network") && repo.name.toLowerCase().includes("toolkit"));
+                const isNetworkSim = repo.name.toLowerCase().includes("enterprise-network") || repo.name.toLowerCase().includes("lan-wlan") || repo.name.toLowerCase().includes("wlan");
+                const isNetworkProject = isNetworkSim || isNetworkAuto;
+                const isBusTracker = repo.name.toLowerCase().includes("bus-tracking");
+                const isCGOMobile = repo.name.toLowerCase().includes("c-go") || repo.name.toLowerCase().includes("cgo") || repo.name.toLowerCase().includes("secure-transit");
+                const isCloudNetwork = repo.name.toLowerCase().includes("secure-cloud") || repo.name.toLowerCase().includes("cloud-network") || (repo.name.toLowerCase().includes("cloud") && repo.name.toLowerCase().includes("network"));
+                const isSpecial = isERP || isFlashcard || isEventSystem || isNetworkProject || isBusTracker || isCGOMobile || isCloudNetwork;
                 const previewImage = getProjectPreview(repo.name);
 
                 return (
@@ -416,7 +721,15 @@ export default function Projects() {
                     key={repo.id}
                     variants={cardVariants}
                     className={`group flex flex-col justify-between overflow-hidden rounded-xl card-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${
-                      isEventSystem
+                      isCloudNetwork
+                        ? "border-sky-500/30 shadow-sky-500/5 bg-[#06121d]/70 hover:border-sky-400"
+                        : isCGOMobile
+                        ? "border-emerald-500/30 shadow-emerald-500/5 bg-[#061710]/70 hover:border-emerald-400"
+                        : isNetworkProject
+                        ? "border-cyan-500/30 shadow-cyan-500/5 bg-[#08151c]/70 hover:border-cyan-400"
+                        : isBusTracker
+                        ? "border-emerald-500/30 shadow-emerald-500/5 bg-[#061510]/70 hover:border-emerald-400"
+                        : isEventSystem
                         ? "border-indigo-500/30 shadow-indigo-500/5 bg-[#090b1c]/70 hover:border-indigo-500"
                         : isSpecial 
                         ? "border-[#ef4444]/40 shadow-[#ef4444]/5 bg-[#170a0d]/70 hover:border-[#ef4444]" 
@@ -436,6 +749,7 @@ export default function Projects() {
                             primarySrc={previewImage}
                             fallbackSrc={previewImage}
                             alt={`${repo.name} preview`}
+                            contain={isCGOMobile}
                           />
                         </div>
                       </a>
@@ -443,15 +757,23 @@ export default function Projects() {
                       {/* Top Language Stamp & Header */}
                       <div className="flex items-center justify-between mb-3 text-[10px] font-mono tracking-widest uppercase">
                         <span className={`font-semibold flex items-center space-x-1 ${
-                          isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
+                          isCloudNetwork ? "text-sky-400" : isCGOMobile ? "text-emerald-400" : isNetworkProject ? "text-cyan-400" : isBusTracker ? "text-emerald-400" : isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
                         }`}>
                           <span className={`w-1.5 h-1.5 rounded-full inline-block mr-1 ${
-                            isEventSystem ? "bg-indigo-400" : "bg-[#ef4444]"
+                            isCloudNetwork ? "bg-sky-400" : isCGOMobile ? "bg-emerald-400" : isNetworkProject ? "bg-cyan-400" : isBusTracker ? "bg-emerald-400" : isEventSystem ? "bg-indigo-400" : "bg-[#ef4444]"
                           }`}></span>
-                          {repo.language || "Web Asset"}
+                          {repo.language || (isCloudNetwork ? "Terraform / AWS" : isNetworkAuto ? "Network Automation" : isNetworkSim ? "Network Sim" : "Web Asset")}
                           {isSpecial && (
                             <span className={`ml-2 px-2 py-0.5 rounded text-[8px] tracking-widest font-sans font-bold uppercase ${
-                              isEventSystem
+                              isCloudNetwork
+                                ? "bg-sky-500/20 text-sky-400"
+                                : isCGOMobile
+                                ? "bg-emerald-500/20 text-emerald-400"
+                                : isNetworkProject
+                                ? "bg-cyan-500/20 text-cyan-400"
+                                : isBusTracker
+                                ? "bg-emerald-500/20 text-emerald-400"
+                                : isEventSystem
                                 ? "bg-indigo-500/20 text-indigo-400"
                                 : "bg-[#ef4444]/20 text-[#ef4444]"
                             }`}>
@@ -467,7 +789,7 @@ export default function Projects() {
 
                       {/* Title of GitHub Repo */}
                       <h3 className={`text-lg font-bold text-white transition-colors duration-200 ${
-                        isEventSystem ? "group-hover:text-indigo-400" : "group-hover:text-[#ef4444]"
+                        isCloudNetwork ? "group-hover:text-sky-400" : isCGOMobile ? "group-hover:text-emerald-400" : isNetworkProject ? "group-hover:text-cyan-400" : isBusTracker ? "group-hover:text-emerald-400" : isEventSystem ? "group-hover:text-indigo-400" : "group-hover:text-[#ef4444]"
                       }`}>
                         <a
                           href={repo.html_url}
@@ -507,7 +829,7 @@ export default function Projects() {
                           <span>{repo.stargazers_count}</span>
                         </span>
                         <span className="flex items-center space-x-1" title="Forks count">
-                          <GitFork className="h-3.5 w-3.5 text-[#ef4444]" />
+                          <GitFork className={`h-3.5 w-3.5 ${isCloudNetwork ? "text-sky-400" : isCGOMobile ? "text-emerald-400" : isNetworkProject ? "text-cyan-400" : isBusTracker ? "text-emerald-400" : "text-[#ef4444]"}`} />
                           <span>{repo.forks_count}</span>
                         </span>
                       </div>
@@ -517,7 +839,7 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`inline-flex items-center space-x-1 text-xs transition-all hover:text-white font-semibold font-sans ${
-                          isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
+                          isCloudNetwork ? "text-sky-400" : isCGOMobile ? "text-emerald-400" : isNetworkProject ? "text-cyan-400" : isBusTracker ? "text-emerald-400" : isEventSystem ? "text-indigo-400" : "text-[#ef4444]"
                         }`}
                       >
                         <span>Explore Repo</span>
@@ -531,6 +853,6 @@ export default function Projects() {
           )}
         </div>
       </div>
-    </main>
+    </section>
   );
 }

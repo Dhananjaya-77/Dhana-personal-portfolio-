@@ -14,9 +14,6 @@ export default function Footer() {
             <span className="font-mono text-lg font-bold tracking-wider text-white">
               Hasitha Dhananjaya
             </span>
-            <p className="mt-1 text-[11px] text-[#a0a0a0] font-medium tracking-wide uppercase">
-               Portfolio
-            </p>
           </div>
 
           {/* Social Links / Access Handles */}

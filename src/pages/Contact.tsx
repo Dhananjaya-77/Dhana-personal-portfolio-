@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, Linkedin, Github, Send, CheckCircle2, MessageSquare, ShieldCheck } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Send, CheckCircle2, MessageSquare } from "lucide-react";
 
 export default function Contact() {
   // Form state that tracks each input field value.
@@ -90,7 +90,7 @@ export default function Contact() {
   ];
 
   return (
-    <main id="contact-page" className="flex-grow py-12 md:py-20">
+    <section id="contact" className="scroll-mt-20 py-16 md:py-24 border-t border-rose-500/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Title Header */}
@@ -144,16 +144,6 @@ export default function Contact() {
               })}
             </div>
 
-            {/* HCI Security Tip Panel */}
-            <div className="rounded-xl border border-dashed border-red-500/20 bg-red-500/5 p-4 flex items-start space-x-3">
-              <ShieldCheck className="h-5 w-5 text-[#ef4444] shrink-0 mt-0.5" />
-              <div>
-                <p className="text-xs font-semibold text-[#ef4444] font-mono tracking-wide uppercase">Secure Communication</p>
-                <p className="text-[11px] text-[#a3a3a3] mt-1 leading-relaxed">
-                  Your communication parameters are filtered and handled client-side in compliance with user-privacy regulations. No automated cookies or tracker tags are dispatched.
-                </p>
-              </div>
-            </div>
           </section>
 
           {/* Right Column: Interaction Form */}
@@ -267,7 +257,6 @@ export default function Contact() {
                 </div>
               </form>
 
-              {/* Dynamic Overlay success state banner for supreme HCI accessibility */}
               <AnimatePresence>
                 {isSubmitted && (
                   <motion.div
@@ -310,6 +299,6 @@ export default function Contact() {
           </section>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
